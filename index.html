@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drone Delivery — Freedom X</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      background-color: #101820;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Decorative arc — Freedom brand geometric element */
+    body::before {
+      content: '';
+      position: fixed;
+      right: -180px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      border: 80px solid #164734;
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      right: -280px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 720px;
+      height: 720px;
+      border-radius: 50%;
+      border: 40px solid #0d2b1e;
+      opacity: 0.45;
+      pointer-events: none;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #02B140;
+      border: 1px solid #02B140;
+      border-radius: 50px;
+      padding: 0.35rem 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+      color: #fff;
+    }
+
+    .hero h1 span {
+      color: #02B140;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: #6b7e8f;
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.95rem 2.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: inherit;
+      color: #fff;
+      background: #02B140;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 24px rgba(2, 177, 64, 0.35);
+    }
+
+    .btn:hover {
+      background: #03c948;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(2, 177, 64, 0.5);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+      background: #029e38;
+    }
+    @media (max-width: 600px) {
+      body::before {
+        right: -220px;
+        width: 360px;
+        height: 360px;
+        border-width: 55px;
+        top: auto;
+        bottom: -100px;
+        transform: none;
+      }
+
+      body::after {
+        right: -300px;
+        width: 520px;
+        height: 520px;
+        border-width: 30px;
+        top: auto;
+        bottom: -160px;
+        transform: none;
+      }
+
+      .hero {
+        padding: 1.5rem 1.25rem;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+        letter-spacing: -0.5px;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .btn {
+        width: 100%;
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="badge">Freedom X</div>
+    <h1>Drone Delivery<br>service by <span>Freedom X</span></h1>
+    <p>Быстрая доставка дроном прямо к вашей двери</p>
+    <button class="btn">Хочу попробовать</button>
+  </div>
+</body>
+</html>
