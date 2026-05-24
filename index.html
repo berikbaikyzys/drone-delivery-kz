@@ -20,9 +20,8 @@
 
     body {
       font-family: 'Inter', 'Segoe UI', sans-serif;
-      background-color: #101820;
-      color: #fff;
-      position: relative;
+      background-color: #EDFBFF;
+      color: #0B1015;
     }
 
     /* ── HEADER ── */
@@ -36,23 +35,8 @@
       display: flex;
       align-items: center;
       padding: 0 2rem;
-      background: rgba(237, 251, 255, 0.06);
-      transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .header.scrolled {
-      background: rgba(237, 251, 255, 0.85);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      box-shadow: 0 1px 0 rgba(0,0,0,0.08);
-    }
-
-    .header.scrolled .nav-link {
-      color: #101820;
-    }
-
-    .header.scrolled .nav-link:hover {
-      color: #02B140;
+      background: #EDFBFF;
+      border-bottom: 1px solid rgba(11, 16, 21, 0.08);
     }
 
     .logo {
@@ -67,12 +51,7 @@
       font-size: 1.1rem;
       font-weight: 800;
       letter-spacing: 0.05em;
-      color: #fff;
-      transition: color 0.3s;
-    }
-
-    .header.scrolled .logo-text {
-      color: #101820;
+      color: #0B1015;
     }
 
     .nav {
@@ -85,7 +64,7 @@
     .nav-link {
       font-size: 0.9rem;
       font-weight: 600;
-      color: rgba(255,255,255,0.75);
+      color: #0B1015;
       text-decoration: none;
       transition: color 0.2s;
     }
@@ -129,26 +108,14 @@
       display: block;
       width: 24px;
       height: 2px;
-      background: #fff;
+      background: #0B1015;
       border-radius: 2px;
-      transition: background 0.3s, transform 0.3s, opacity 0.3s;
+      transition: transform 0.3s, opacity 0.3s;
     }
 
-    .header.scrolled .burger span {
-      background: #101820;
-    }
-
-    .burger.open span:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-    }
-
-    .burger.open span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .burger.open span:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-    }
+    .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .burger.open span:nth-child(2) { opacity: 0; }
+    .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
     /* Mobile menu */
     .mobile-menu {
@@ -158,13 +125,11 @@
       left: 0;
       right: 0;
       z-index: 99;
-      background: rgba(16, 24, 32, 0.97);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: #EDFBFF;
+      border-bottom: 1px solid rgba(11, 16, 21, 0.08);
       padding: 1.5rem 2rem 2rem;
       flex-direction: column;
       gap: 1.25rem;
-      border-top: 1px solid rgba(255,255,255,0.07);
     }
 
     .mobile-menu.open {
@@ -174,10 +139,11 @@
     .mobile-menu a {
       font-size: 1rem;
       font-weight: 600;
-      color: rgba(255,255,255,0.8);
+      color: #0B1015;
       text-decoration: none;
       padding: 0.5rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
+      border-bottom: 1px solid rgba(11, 16, 21, 0.07);
+      transition: color 0.2s;
     }
 
     .mobile-menu a:hover {
@@ -189,6 +155,7 @@
       margin-top: 0.5rem;
       padding: 0.85rem;
       border-bottom: none;
+      color: #fff;
     }
 
     /* ── HERO ── */
@@ -199,6 +166,7 @@
       justify-content: center;
       position: relative;
       overflow: hidden;
+      background-color: #EDFBFF;
     }
 
     .hero-section::before {
@@ -210,8 +178,7 @@
       width: 520px;
       height: 520px;
       border-radius: 50%;
-      border: 80px solid #164734;
-      opacity: 0.55;
+      border: 80px solid rgba(22, 71, 52, 0.15);
       pointer-events: none;
     }
 
@@ -224,8 +191,7 @@
       width: 720px;
       height: 720px;
       border-radius: 50%;
-      border: 40px solid #0d2b1e;
-      opacity: 0.45;
+      border: 40px solid rgba(22, 71, 52, 0.08);
       pointer-events: none;
     }
 
@@ -248,6 +214,7 @@
       border-radius: 50px;
       padding: 0.35rem 1rem;
       margin-bottom: 1.5rem;
+      background: transparent;
     }
 
     .hero h1 {
@@ -256,7 +223,7 @@
       letter-spacing: -1.5px;
       line-height: 1.1;
       margin-bottom: 1.25rem;
-      color: #fff;
+      color: #0B1015;
     }
 
     .hero h1 span {
@@ -265,7 +232,7 @@
 
     .hero p {
       font-size: 1.1rem;
-      color: #6b7e8f;
+      color: #5F5E5A;
       margin-bottom: 2.5rem;
       line-height: 1.6;
     }
@@ -282,13 +249,13 @@
       border-radius: 50px;
       cursor: pointer;
       transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-      box-shadow: 0 4px 24px rgba(2, 177, 64, 0.35);
+      box-shadow: 0 4px 24px rgba(2, 177, 64, 0.25);
     }
 
     .btn:hover {
       background: #03c948;
       transform: translateY(-3px);
-      box-shadow: 0 8px 32px rgba(2, 177, 64, 0.5);
+      box-shadow: 0 8px 32px rgba(2, 177, 64, 0.35);
     }
 
     .btn:active {
@@ -304,19 +271,20 @@
       align-items: center;
       justify-content: center;
       padding: 6rem 2rem;
-      border-top: 1px solid rgba(255,255,255,0.06);
+      background-color: #EDFBFF;
+      border-top: 1px solid rgba(11, 16, 21, 0.08);
     }
 
     .section h2 {
       font-size: 2rem;
       font-weight: 800;
-      color: #fff;
+      color: #0B1015;
       margin-bottom: 1rem;
     }
 
     .section p {
       font-size: 1rem;
-      color: #6b7e8f;
+      color: #5F5E5A;
     }
 
     .section-badge {
@@ -326,22 +294,17 @@
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: #02B140;
-      border: 1px solid #164734;
-      background: rgba(2, 177, 64, 0.08);
+      border: 1px solid #02B140;
       border-radius: 50px;
       padding: 0.3rem 0.9rem;
       margin-bottom: 1rem;
+      background: transparent;
     }
 
     /* ── MOBILE ── */
     @media (max-width: 768px) {
-      .nav {
-        display: none;
-      }
-
-      .burger {
-        display: flex;
-      }
+      .nav { display: none; }
+      .burger { display: flex; }
 
       .hero-section::before {
         right: -220px;
@@ -363,18 +326,14 @@
         transform: none;
       }
 
-      .hero {
-        padding: 1.5rem 1.25rem;
-      }
+      .hero { padding: 1.5rem 1.25rem; }
 
       .hero h1 {
         font-size: 2rem;
         letter-spacing: -0.5px;
       }
 
-      .hero p {
-        font-size: 1rem;
-      }
+      .hero p { font-size: 1rem; }
 
       .btn {
         width: 100%;
@@ -393,7 +352,6 @@
   <!-- HEADER -->
   <header class="header" id="header">
     <a href="#" class="logo">
-      <!-- Freedom shield logo (inline SVG) -->
       <svg width="32" height="36" viewBox="0 0 32 36" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M16 0L0 5.6V18C0 27 8 33.8 16 36C24 33.8 32 27 32 18V5.6L16 0Z" fill="#02B140"/>
         <path d="M16 0L16 36C24 33.8 32 27 32 18V5.6L16 0Z" fill="#164734"/>
@@ -454,22 +412,14 @@
   </section>
 
   <script>
-    const header = document.getElementById('header');
     const burger = document.getElementById('burger');
     const mobileMenu = document.getElementById('mobile-menu');
 
-    // Sticky header style on scroll
-    window.addEventListener('scroll', () => {
-      header.classList.toggle('scrolled', window.scrollY > 20);
-    });
-
-    // Burger toggle
     burger.addEventListener('click', () => {
       burger.classList.toggle('open');
       mobileMenu.classList.toggle('open');
     });
 
-    // Close mobile menu on link click
     mobileMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         burger.classList.remove('open');
