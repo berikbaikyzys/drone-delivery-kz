@@ -301,6 +301,162 @@
       background: transparent;
     }
 
+    /* ── FORM SECTION ── */
+    .form-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 2rem;
+      background-color: #EDFBFF;
+      border-top: 1px solid rgba(11, 16, 21, 0.08);
+    }
+
+    .form-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 3rem;
+      width: 100%;
+      max-width: 520px;
+      box-shadow: 0 4px 32px rgba(11, 16, 21, 0.07);
+    }
+
+    .form-card .section-badge {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-card h2 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: #0B1015;
+      margin-bottom: 0.6rem;
+      line-height: 1.2;
+    }
+
+    .form-card .form-subtitle {
+      font-size: 0.95rem;
+      color: #5F5E5A;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .form-group label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #0B1015;
+    }
+
+    .form-group input {
+      padding: 0.75rem 1rem;
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: #0B1015;
+      background: #fff;
+      border: 1px solid rgba(11, 16, 21, 0.18);
+      border-radius: 10px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-group input::placeholder {
+      color: #b0b5bc;
+    }
+
+    .form-group input:focus {
+      border-color: #02B140;
+      box-shadow: 0 0 0 3px rgba(2, 177, 64, 0.1);
+    }
+
+    .form-checkbox {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      margin-bottom: 1.5rem;
+      cursor: pointer;
+    }
+
+    .form-checkbox input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      margin-top: 2px;
+      accent-color: #02B140;
+      cursor: pointer;
+    }
+
+    .form-checkbox span {
+      font-size: 0.85rem;
+      color: #5F5E5A;
+      line-height: 1.5;
+    }
+
+    .form-checkbox a {
+      color: #02B140;
+      text-decoration: underline;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: inherit;
+      color: #fff;
+      background: #02B140;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 20px rgba(2, 177, 64, 0.25);
+    }
+
+    .btn-submit:hover {
+      background: #03c948;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(2, 177, 64, 0.35);
+    }
+
+    .btn-submit:active {
+      transform: translateY(0);
+      background: #029e38;
+    }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 2rem 0 1rem;
+    }
+
+    .form-success .success-icon {
+      width: 56px;
+      height: 56px;
+      background: rgba(2, 177, 64, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.25rem;
+    }
+
+    .form-success h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #0B1015;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-success p {
+      font-size: 0.95rem;
+      color: #5F5E5A;
+    }
+
     /* ── MOBILE ── */
     @media (max-width: 768px) {
       .nav { display: none; }
@@ -344,6 +500,14 @@
         font-size: 1.5rem;
         text-align: center;
       }
+
+      .form-card {
+        padding: 2rem 1.5rem;
+      }
+
+      .form-card h2 {
+        font-size: 1.4rem;
+      }
     }
   </style>
 </head>
@@ -364,7 +528,7 @@
       <a href="#how-it-works" class="nav-link">Как работает</a>
       <a href="#delivery-zone" class="nav-link">Зона доставки</a>
       <a href="#faq" class="nav-link">FAQ</a>
-      <a href="#hero" class="btn-nav">Попробовать</a>
+      <a href="#try-it" class="btn-nav">Попробовать</a>
     </nav>
 
     <button class="burger" id="burger" aria-label="Меню">
@@ -379,7 +543,7 @@
     <a href="#how-it-works">Как работает</a>
     <a href="#delivery-zone">Зона доставки</a>
     <a href="#faq">FAQ</a>
-    <a href="#hero" class="btn-nav">Попробовать</a>
+    <a href="#try-it" class="btn-nav">Попробовать</a>
   </div>
 
   <!-- HERO -->
@@ -388,7 +552,7 @@
       <div class="badge">Freedom X</div>
       <h1>Drone Delivery<br>service by <span>Freedom X</span></h1>
       <p>Быстрая доставка дроном прямо к вашей двери</p>
-      <button class="btn">Хочу попробовать</button>
+      <a href="#try-it" class="btn">Хочу попробовать</a>
     </div>
   </section>
 
@@ -403,6 +567,49 @@
     <div class="section-badge">Карта</div>
     <h2>Зона доставки</h2>
     <p>Скоро здесь появится карта покрытия</p>
+  </section>
+
+  <!-- FORM SECTION -->
+  <section class="form-section" id="try-it">
+    <div class="form-card">
+      <div class="section-badge">Заявка</div>
+      <h2>Попробуйте доставку дроном</h2>
+      <p class="form-subtitle">Оставьте заявку и мы свяжемся с вами для пробного заказа дроном</p>
+
+      <form id="contact-form" action="https://formspree.io/f/FORM_ID" method="POST">
+        <div class="form-group">
+          <label for="name">Имя</label>
+          <input type="text" id="name" name="name" placeholder="Ваше имя" required>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Телефон</label>
+          <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" required>
+        </div>
+
+        <div class="form-group">
+          <label for="address">Адрес доставки</label>
+          <input type="text" id="address" name="address" placeholder="Улица, дом, квартира" required>
+        </div>
+
+        <label class="form-checkbox">
+          <input type="checkbox" name="consent" required>
+          <span>Я согласен с <a href="#">политикой конфиденциальности</a></span>
+        </label>
+
+        <button type="submit" class="btn-submit">Отправить заявку</button>
+      </form>
+
+      <div class="form-success" id="form-success">
+        <div class="success-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M5 13l4 4L19 7" stroke="#02B140" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Спасибо!</h3>
+        <p>Мы свяжемся с вами в ближайшее время</p>
+      </div>
+    </div>
   </section>
 
   <section class="section" id="faq">
@@ -425,6 +632,24 @@
         burger.classList.remove('open');
         mobileMenu.classList.remove('open');
       });
+    });
+
+    // Form submission
+    const form = document.getElementById('contact-form');
+    const successMsg = document.getElementById('form-success');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        form.style.display = 'none';
+        successMsg.style.display = 'block';
+      }
     });
   </script>
 </body>
