@@ -626,6 +626,102 @@
       color: #5F5E5A;
     }
 
+    /* ── FAQ ── */
+    .faq-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 2rem;
+      background-color: #EDFBFF;
+      border-top: 1px solid rgba(11, 16, 21, 0.08);
+    }
+
+    .faq-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .faq-header h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #0B1015;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.5px;
+    }
+
+    .faq-header p {
+      font-size: 1rem;
+      color: #5F5E5A;
+    }
+
+    .faq-list {
+      width: 100%;
+      max-width: 720px;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid rgba(11, 16, 21, 0.1);
+    }
+
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.25rem 0;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #0B1015;
+      transition: color 0.2s;
+      user-select: none;
+    }
+
+    .faq-question:hover {
+      color: #02B140;
+    }
+
+    .faq-icon {
+      width: 24px;
+      height: 24px;
+      min-width: 24px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(11, 16, 21, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s, background 0.2s, transform 0.3s;
+      font-size: 1rem;
+      line-height: 1;
+      color: #5F5E5A;
+    }
+
+    .faq-item.open .faq-question {
+      color: #02B140;
+    }
+
+    .faq-item.open .faq-icon {
+      border-color: #02B140;
+      background: rgba(2, 177, 64, 0.08);
+      color: #02B140;
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.2s ease;
+    }
+
+    .faq-answer-inner {
+      font-size: 0.92rem;
+      color: #5F5E5A;
+      line-height: 1.7;
+      padding-bottom: 1.25rem;
+    }
+
     /* ── MOBILE ── */
     @media (max-width: 768px) {
       .nav { display: none; }
@@ -891,10 +987,66 @@
     </div>
   </section>
 
-  <section class="section" id="faq">
-    <div class="section-badge">FAQ</div>
-    <h2>Часто задаваемые вопросы</h2>
-    <p>Скоро здесь появятся ответы на вопросы</p>
+  <section class="faq-section" id="faq">
+    <div class="faq-header">
+      <div class="section-badge">FAQ</div>
+      <h2>Часто задаваемые вопросы</h2>
+      <p>Всё что нужно знать о доставке дроном</p>
+    </div>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-question">Это реально работает или просто концепт? <span class="faq-icon">+</span></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Уже работает — у нас есть свой парк дронов и мы выполняем реальные доставки. С января по май 2026 года выполнили более 250 коммерческих доставок. Сейчас развиваем проект в Алматы и планируем дальнейшее расширение.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Что доставляют дроны? <span class="faq-icon">+</span></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Продукты и еду — заказы из Freedom SuperApp.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Как работает доставка дроном? <span class="faq-icon">+</span></div>
+        <div class="faq-answer"><div class="faq-answer-inner">После оформления заказа дрон автоматически вылетает с ближайшего пункта отправки и доставляет заказ точно в указанную вами точку — двор или другое открытое место.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Как происходит получение заказа? <span class="faq-icon">+</span></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Дрон снижается до высоты 20 метров над землёй и спускает заказ на тросе-лебёдке. После того как дрон улетит, просто заберите заказ с указанного места.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">За сколько доставят заказ? <span class="faq-icon">+</span></div>
+        <div class="faq-answer"><div class="faq-answer-inner">В среднем за 25 минут с момента оформления заказа.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Какие районы Алматы покрываются? <span class="faq-icon">+</span></div>
+        <div class="faq-answer"><div class="faq-answer-inner">По состоянию на март 2026 года доставка доступна в районе «Рабочий посёлок». Зона постепенно расширяется — следите за обновлениями в соцсетях и приложении SuperApp.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Где находится демо-площадка? <span class="faq-icon">+</span></div>
+        <div class="faq-answer"><div class="faq-answer-inner">В Алматы работают три тестовые демонстрационные площадки: 1) Байзакова, 280 (pick-up point), 2) Панфилова, 92, 3) Жибек Жолы, 135. Один из этих адресов нужно указывать при оформлении заказа, чтобы дрон доставил его на площадку.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Это безопасно для детей и животных? <span class="faq-icon">+</span></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Да, при соблюдении инструкции. Дети и животные должны находиться в помещении или на расстоянии не менее 15 метров. Не подходите к дрону во время сброса груза.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Есть ли разрешение на полёты? <span class="faq-icon">+</span></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Да. Все грузовые дроны поставлены на учёт по правилам Авиационной администрации. Компания-оператор — ТОО «Robonexus» — имеет все необходимые разрешения на авиационные работы и согласования. Операторы дронов имеют 3-ю категорию БАС.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">А если плохая погода? <span class="faq-icon">+</span></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Дроны устойчивы к дождю, ветру и перепадам температур. Но при экстремальных условиях — сильном дожде и/или ветре, превышающем разрешённые лимиты — доставка может быть перенесена или передана обычному курьеру.</div></div>
+      </div>
+
+    </div>
   </section>
 
   <script>
@@ -910,6 +1062,29 @@
       link.addEventListener('click', () => {
         burger.classList.remove('open');
         mobileMenu.classList.remove('open');
+      });
+    });
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const item = question.parentElement;
+        const answer = item.querySelector('.faq-answer');
+        const isOpen = item.classList.contains('open');
+
+        // Close all
+        document.querySelectorAll('.faq-item.open').forEach(openItem => {
+          openItem.classList.remove('open');
+          openItem.querySelector('.faq-answer').style.maxHeight = null;
+          openItem.querySelector('.faq-icon').textContent = '+';
+        });
+
+        // Open clicked if it was closed
+        if (!isOpen) {
+          item.classList.add('open');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+          item.querySelector('.faq-icon').textContent = '+';
+        }
       });
     });
 
