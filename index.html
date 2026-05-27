@@ -301,6 +301,125 @@
       background: transparent;
     }
 
+    /* ── HOW IT WORKS ── */
+    .steps-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 2rem;
+      background-color: #EDFBFF;
+      border-top: 1px solid rgba(11, 16, 21, 0.08);
+    }
+
+    .steps-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .steps-header h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #0B1015;
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.5px;
+    }
+
+    .steps-header p {
+      font-size: 1rem;
+      color: #5F5E5A;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 960px;
+      width: 100%;
+    }
+
+    .step-card {
+      position: relative;
+      background: #fff;
+      border: 1px solid rgba(11, 16, 21, 0.08);
+      border-radius: 16px;
+      padding: 1.75rem 1.5rem 1.5rem;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(24px);
+    }
+
+    .step-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.25s ease;
+    }
+
+    .step-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(11, 16, 21, 0.09);
+    }
+
+    .step-num {
+      position: absolute;
+      top: -8px;
+      right: 12px;
+      font-size: 5rem;
+      font-weight: 800;
+      color: rgba(2, 177, 64, 0.07);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .step-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(2, 177, 64, 0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .step-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .step-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0B1015;
+      margin-bottom: 0.5rem;
+    }
+
+    .step-card p {
+      font-size: 0.88rem;
+      color: #5F5E5A;
+      line-height: 1.6;
+    }
+
+    /* Connector arrow between cards in a row */
+    .step-card:not(:nth-child(3n))::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: -1.25rem;
+      transform: translateY(-50%);
+      width: 1rem;
+      height: 2px;
+      background: repeating-linear-gradient(
+        90deg,
+        #02B140 0, #02B140 4px,
+        transparent 4px, transparent 8px
+      );
+      z-index: 2;
+    }
+
     /* ── FORM SECTION ── */
     .form-section {
       min-height: 100vh;
@@ -501,6 +620,33 @@
         text-align: center;
       }
 
+      .steps-header h2 {
+        font-size: 1.6rem;
+      }
+
+      .steps-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .step-card:not(:nth-child(3n))::after {
+        display: none;
+      }
+
+      .step-card:nth-child(odd):not(:nth-child(2n))::after {
+        display: block;
+      }
+
+    }
+
+    @media (max-width: 540px) {
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .step-card::after {
+        display: none !important;
+      }
+
       .form-card {
         padding: 2rem 1.5rem;
       }
@@ -551,11 +697,83 @@
     </div>
   </section>
 
-  <!-- STUB SECTIONS -->
-  <section class="section" id="how-it-works">
-    <div class="section-badge">Процесс</div>
-    <h2>Как работает доставка</h2>
-    <p>Скоро здесь появится подробное описание</p>
+  <!-- HOW IT WORKS -->
+  <section class="steps-section" id="how-it-works">
+    <div class="steps-header">
+      <div class="section-badge">Процесс</div>
+      <h2>Как получить доставку</h2>
+      <p>От заказа до посылки — 6 простых шагов</p>
+    </div>
+
+    <div class="steps-grid">
+
+      <div class="step-card">
+        <span class="step-num">1</span>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#02B140" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+        </div>
+        <h3>Оформите заказ</h3>
+        <p>Выберите товары в Freedom SuperApp и оформите заказ с доставкой дроном.</p>
+      </div>
+
+      <div class="step-card">
+        <span class="step-num">2</span>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#02B140" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>
+          </svg>
+        </div>
+        <h3>Посылка готовится</h3>
+        <p>Оператор комплектует заказ на точке отправки и передаёт дрону.</p>
+      </div>
+
+      <div class="step-card">
+        <span class="step-num">3</span>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#02B140" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <h3>Дрон вылетает</h3>
+        <p>Дрон поднимается и летит по оптимальному маршруту в пределах зоны доставки.</p>
+      </div>
+
+      <div class="step-card">
+        <span class="step-num">4</span>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#02B140" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <h3>Дрон над точкой</h3>
+        <p>Дрон прибывает и зависает над согласованной точкой выдачи.</p>
+      </div>
+
+      <div class="step-card">
+        <span class="step-num">5</span>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#02B140" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/>
+          </svg>
+        </div>
+        <h3>Посылка опускается</h3>
+        <p>Лебёдка плавно опускает заказ. Забирать прямо с земли — безопасно и удобно.</p>
+      </div>
+
+      <div class="step-card">
+        <span class="step-num">6</span>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#02B140" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <h3>Заказ у вас</h3>
+        <p>Подтвердите получение в приложении. Готово — дрон улетает обратно.</p>
+      </div>
+
+    </div>
   </section>
 
   <section class="section" id="delivery-zone">
@@ -628,6 +846,20 @@
         mobileMenu.classList.remove('open');
       });
     });
+
+    // Fade-in step cards on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          const card = entry.target;
+          const delay = Array.from(card.parentElement.children).indexOf(card) * 80;
+          setTimeout(() => card.classList.add('visible'), delay);
+          observer.unobserve(card);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.step-card').forEach(card => observer.observe(card));
 
     // Form submission
     const form = document.getElementById('contact-form');
