@@ -420,6 +420,56 @@
       z-index: 2;
     }
 
+    .steps-note {
+      max-width: 960px;
+      width: 100%;
+      margin-top: 2.5rem;
+      background: rgba(245, 158, 11, 0.07);
+      border-left: 3px solid #F59E0B;
+      border-radius: 0 12px 12px 0;
+      padding: 1.25rem 1.5rem;
+    }
+
+    .steps-note-title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #92610A;
+      margin-bottom: 0.85rem;
+    }
+
+    .steps-note-title svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .steps-note ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .steps-note li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: #5F5E5A;
+      line-height: 1.5;
+    }
+
+    .steps-note li::before {
+      content: '⚠';
+      font-size: 0.75rem;
+      color: #F59E0B;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
     /* ── FORM SECTION ── */
     .form-section {
       min-height: 100vh;
@@ -773,6 +823,22 @@
         <p>Подтвердите получение в приложении. Готово — дрон улетает обратно.</p>
       </div>
 
+    </div>
+
+    <div class="steps-note">
+      <div class="steps-note-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        Важно знать
+      </div>
+      <ul>
+        <li>Дрон не садится — заказ спускается на лебёдке</li>
+        <li>Не стойте под дроном во время доставки</li>
+        <li>Держитесь на расстоянии, не трогайте лебёдку руками</li>
+        <li>Забирайте заказ только после того, как дрон улетел</li>
+        <li>В плохую погоду доставка может быть отменена</li>
+      </ul>
     </div>
   </section>
 
