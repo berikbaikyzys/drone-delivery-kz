@@ -1455,6 +1455,12 @@
       maxZoom: 19
     }).addTo(map);
 
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      opacity: 0.4,
+      maxZoom: 19,
+      attribution: ''
+    }).addTo(map);
+
     let deliveryGeoJSON = null;
     let deliveryLayer = null;
 
