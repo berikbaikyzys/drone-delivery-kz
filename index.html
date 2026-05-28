@@ -7,9 +7,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet">
-  <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
-  <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
   <style>
     * {
       margin: 0;
@@ -730,7 +730,7 @@
       margin-bottom: 2rem;
     }
 
-    #delivery-map {
+    #map {
       width: 100%;
       height: 500px;
     }
@@ -1021,7 +1021,7 @@
         font-size: 1.6rem;
       }
 
-      #delivery-map {
+      #map {
         height: 350px;
       }
 
@@ -1240,7 +1240,7 @@
           </div>
           <div id="address-result"></div>
         </div>
-        <div id="delivery-map"></div>
+        <div id="map"></div>
       </div>
 
       <div class="demo-spots">
@@ -1436,29 +1436,42 @@
 
     document.querySelectorAll('.step-card').forEach(card => observer.observe(card));
 
-    // Mapbox map
-    const MAPBOX_TOKEN = window.MAPBOX_TOKEN || 'pk.eyJ1IjoiYmVyaWtiYWlreXp5cyIsImEiOiJjbXBwZHFoZHcwZGllMnFyNXJxMTI2c2h4In0.DabvTjHhd8LPjF9v6tGa1A';
-    mapboxgl.accessToken = MAPBOX_TOKEN;
+    // Leaflet map
+    const map = L.map('map', { zoomControl: true }).setView([43.2720, 76.9150], 13);
 
-    const map = new mapboxgl.Map({
-      container: 'delivery-map',
-      style: 'mapbox://styles/mapbox/satellite-streets-v12',
-      center: [76.9150, 43.2720],
-      zoom: 13
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors',
+      maxZoom: 19
+    }).addTo(map);
+
+    fetch('delivery-zone.geojson')
+      .then(r => r.json())
+      .then(data => {
+        L.geoJSON(data, {
+          style: {
+            color: '#22c55e',
+            weight: 2,
+            opacity: 0.8,
+            fillColor: '#22c55e',
+            fillOpacity: 0.15
+          }
+        }).addTo(map);
+      });
+
+    const greenIcon = L.divIcon({
+      html: '<div style="background:#22c55e;width:14px;height:14px;border-radius:50%;border:2px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.3)"></div>',
+      iconSize: [14, 14], iconAnchor: [7, 7], className: ''
     });
 
-    map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
-
-    map.on('load', () => {
-      fetch('delivery-zone.geojson')
-        .then(r => r.json())
-        .then(data => {
-          map.addSource('delivery-zone', { type: 'geojson', data });
-          map.addLayer({ id: 'zone-fill', type: 'fill', source: 'delivery-zone',
-            paint: { 'fill-color': '#22c55e', 'fill-opacity': 0.15 } });
-          map.addLayer({ id: 'zone-border', type: 'line', source: 'delivery-zone',
-            paint: { 'line-color': '#22c55e', 'line-width': 2, 'line-opacity': 0.8 } });
-        });
+    const spots = [
+      { coords: [43.2558, 76.9285], name: 'Байзакова, 280', desc: 'Pick-up point' },
+      { coords: [43.2650, 76.9192], name: 'Панфилова, 92', desc: 'Демо-площадка' },
+      { coords: [43.2590, 76.9450], name: 'Жибек Жолы, 135', desc: 'Демо-площадка' },
+    ];
+    spots.forEach(s => {
+      L.marker(s.coords, { icon: greenIcon })
+        .addTo(map)
+        .bindPopup(`<b>${s.name}</b><br>${s.desc}`);
     });
 
     // Address checker
@@ -1468,19 +1481,20 @@
       const query = document.getElementById('address-input').value.trim();
       if (!query) return;
 
-      const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(query + ' Алматы')}.json?access_token=${MAPBOX_TOKEN}&country=kz&limit=1`;
+      const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query + ', Алматы')}&format=json&limit=1`;
       const res = await fetch(url);
       const data = await res.json();
 
-      if (!data.features || !data.features.length) {
+      if (!data.length) {
         showResult(false, '❌ Адрес не найден. Уточните запрос.');
         return;
       }
 
-      const [lng, lat] = data.features[0].center;
+      const lat = parseFloat(data[0].lat);
+      const lng = parseFloat(data[0].lon);
 
-      map.flyTo({ center: [lng, lat], zoom: 15 });
-      new mapboxgl.Marker({ color: '#02B140' }).setLngLat([lng, lat]).addTo(map);
+      L.marker([lat, lng]).addTo(map);
+      map.setView([lat, lng], 15);
 
       if (!cachedZone) {
         cachedZone = await fetch('delivery-zone.geojson').then(r => r.json());
@@ -1492,7 +1506,7 @@
       if (inside) {
         showResult(true, '✅ Отлично! Доставка дроном доступна по вашему адресу.');
       } else {
-        showResult(false, '❌ К сожалению, ваш адрес пока вне зоны доставки. Мы расширяемся!');
+        showResult(false, '❌ Ваш адрес пока вне зоны доставки. Мы расширяемся!');
       }
     }
 
