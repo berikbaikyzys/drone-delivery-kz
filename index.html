@@ -1525,17 +1525,18 @@
                : '❌ Выбранный адрес пока вне зоны доставки.');
 
       // Шаг 2 — обновляем попап с адресом
-      fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
+      fetch(`https://photon.komoot.io/reverse?lat=${lat}&lon=${lng}&lang=ru`)
         .then(r => r.json())
         .then(data => {
-          const road = data.road || '';
-          const house = data.house_number ? ', ' + data.house_number : '';
-          const addr = road ? road + house : 'Адрес не определён';
+          const props = data.features?.[0]?.properties;
+          const street = props?.street || props?.name || '';
+          const house = props?.housenumber ? ', ' + props.housenumber : '';
+          const addr = street ? street + house : `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
           clickMarker.setPopupContent(`
-            <div>
-              <b>${statusText}</b><br>
-              <span>${addr}</span><br>
-              <small>📍 ${lat.toFixed(5)}, ${lng.toFixed(5)}</small>
+            <div style="min-width:200px;font-family:sans-serif">
+              <b style="font-size:14px">${statusText}</b><br>
+              <span style="font-size:13px;color:#0f172a">${addr}</span><br>
+              <span style="color:#64748b;font-size:11px">📍 ${lat.toFixed(5)}, ${lng.toFixed(5)}</span>
             </div>
           `);
         });
