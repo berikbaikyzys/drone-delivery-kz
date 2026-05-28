@@ -1481,6 +1481,16 @@
         map.fitBounds(deliveryLayer.getBounds(), { padding: [40, 40] });
       });
 
+    const redIcon = L.divIcon({
+      html: '<div style="width:16px;height:16px;background:#ef4444;border-radius:50%;border:2px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.4)"></div>',
+      iconSize: [16, 16], iconAnchor: [8, 8], className: ''
+    });
+
+    const blueIcon = L.divIcon({
+      html: '<div style="width:16px;height:16px;background:#3b82f6;border-radius:50%;border:2px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.4)"></div>',
+      iconSize: [16, 16], iconAnchor: [8, 8], className: ''
+    });
+
     const starIcon = L.divIcon({
       html: '<div style="font-size:24px;line-height:1;text-align:center">⭐</div>',
       iconSize: [32, 32],
@@ -1503,7 +1513,7 @@
     map.on('click', function(e) {
       const { lat, lng } = e.latlng;
       if (clickMarker) { map.removeLayer(clickMarker); clickMarker = null; }
-      clickMarker = L.marker([lat, lng]).addTo(map);
+      clickMarker = L.marker([lat, lng], { icon: blueIcon }).addTo(map);
 
       if (!deliveryGeoJSON) return;
       const point = turf.point([lng, lat]);
@@ -1552,6 +1562,7 @@
 
     // Address checker
     let cachedZone = null;
+    let searchMarker = null;
 
     async function checkAddress() {
       const query = document.getElementById('address-input').value.trim();
@@ -1569,7 +1580,8 @@
       const lat = parseFloat(data[0].lat);
       const lng = parseFloat(data[0].lon);
 
-      L.marker([lat, lng]).addTo(map);
+      if (searchMarker) { map.removeLayer(searchMarker); searchMarker = null; }
+      searchMarker = L.marker([lat, lng], { icon: redIcon }).addTo(map);
       map.setView([lat, lng], 15);
 
       if (!cachedZone) {
