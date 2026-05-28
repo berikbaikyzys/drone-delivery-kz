@@ -745,7 +745,8 @@
       padding: 16px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
       min-width: 300px;
-      max-width: 360px;
+      max-width: 440px;
+      overflow: hidden;
     }
 
     .address-checker h4 {
@@ -758,10 +759,12 @@
     .address-checker-row {
       display: flex;
       gap: 0.5rem;
+      flex-wrap: nowrap;
     }
 
     .address-checker input {
       flex: 1;
+      min-width: 0;
       padding: 0.6rem 0.85rem;
       font-size: 0.875rem;
       font-family: inherit;
@@ -791,6 +794,7 @@
       border-radius: 8px;
       cursor: pointer;
       white-space: nowrap;
+      flex-shrink: 0;
       transition: background 0.2s;
     }
 
@@ -1240,6 +1244,7 @@
             <button onclick="checkAddress()">Проверить</button>
           </div>
           <div id="address-result"></div>
+          <p style="font-size:0.75rem;color:#5F5E5A;margin-top:10px;line-height:1.4">🟢 Зелёная зона — текущая зона покрытия доставки дроном. Мы постепенно расширяемся!</p>
         </div>
         <div id="map"></div>
       </div>
@@ -1470,9 +1475,11 @@
         map.fitBounds(deliveryLayer.getBounds(), { padding: [40, 40] });
       });
 
-    const greenIcon = L.divIcon({
-      html: '<div style="background:#27C840;width:14px;height:14px;border-radius:50%;border:2px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.4)"></div>',
-      iconSize: [14, 14], iconAnchor: [7, 7], className: ''
+    const starIcon = L.divIcon({
+      html: '<div style="font-size:24px;line-height:1;text-align:center">⭐</div>',
+      iconSize: [32, 32],
+      iconAnchor: [16, 16],
+      className: ''
     });
 
     const spots = [
@@ -1481,7 +1488,7 @@
       { coords: [43.258467, 76.944637], name: 'Панфилова, 92', desc: 'Демо-площадка · угол Айтеке би' },
     ];
     spots.forEach(s => {
-      L.marker(s.coords, { icon: greenIcon })
+      L.marker(s.coords, { icon: starIcon })
         .addTo(map)
         .bindPopup(`<b>${s.name}</b><br>${s.desc}`);
     });
@@ -1489,34 +1496,42 @@
     let clickMarker = null;
     map.on('click', function(e) {
       const { lat, lng } = e.latlng;
-      if (clickMarker) map.removeLayer(clickMarker);
+      if (clickMarker) { map.removeLayer(clickMarker); clickMarker = null; }
       clickMarker = L.marker([lat, lng]).addTo(map);
 
       if (!deliveryGeoJSON) return;
       const point = turf.point([lng, lat]);
       const polygon = deliveryGeoJSON.features[0];
       const inside = turf.booleanPointInPolygon(point, polygon);
+      const statusText = inside ? '✅ Доставка доступна' : '❌ Вне зоны доставки';
 
-      // Шаг 1 — мгновенный попап
-      clickMarker.bindPopup(inside ? '✅ Доставка доступна' : '❌ Вне зоны доставки').openPopup();
+      // Шаг 1 — мгновенный попап с координатами
+      clickMarker.bindPopup(`
+        <div>
+          <b>${statusText}</b><br>
+          <small>📍 ${lat.toFixed(5)}, ${lng.toFixed(5)}</small><br>
+          <small style="color:#888">Загружаю адрес...</small>
+        </div>
+      `).openPopup();
 
-      if (typeof showResult === 'function') {
-        showResult(inside,
-          inside ? '✅ Доставка дроном доступна по выбранному адресу.'
-                 : '❌ Выбранный адрес пока вне зоны доставки.');
-      }
+      showResult(inside,
+        inside ? '✅ Доставка дроном доступна по выбранному адресу.'
+               : '❌ Выбранный адрес пока вне зоны доставки.');
 
-      // Шаг 2 — асинхронно обновляем адрес
+      // Шаг 2 — обновляем попап с адресом
       fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
         .then(r => r.json())
         .then(data => {
-          const addr = data.road
-            ? `${data.road}${data.house_number ? ', ' + data.house_number : ''}`
-            : `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
-          clickMarker.setPopupContent(inside
-            ? `✅ Доставка доступна<br><small>${addr}</small>`
-            : `❌ Вне зоны доставки<br><small>${addr}</small>`
-          );
+          const road = data.road || '';
+          const house = data.house_number ? ', ' + data.house_number : '';
+          const addr = road ? road + house : 'Адрес не определён';
+          clickMarker.setPopupContent(`
+            <div>
+              <b>${statusText}</b><br>
+              <span>${addr}</span><br>
+              <small>📍 ${lat.toFixed(5)}, ${lng.toFixed(5)}</small>
+            </div>
+          `);
         });
     });
 
@@ -1566,9 +1581,23 @@
 
     function showResult(success, text) {
       const el = document.getElementById('address-result');
-      el.textContent = text;
-      el.style.color = success ? '#16a34a' : '#dc2626';
+      el.innerHTML = '';
       el.style.display = 'block';
+
+      const msg = document.createElement('div');
+      msg.textContent = text;
+      msg.style.color = success ? '#16a34a' : '#dc2626';
+      msg.style.fontWeight = '600';
+      msg.style.fontSize = '0.82rem';
+      el.appendChild(msg);
+
+      if (success) {
+        const btn = document.createElement('a');
+        btn.href = '#try-it';
+        btn.innerHTML = '📦 Заказать доставку';
+        btn.style.cssText = 'display:inline-block;margin-top:10px;background:#22c55e;color:white;padding:10px 24px;border-radius:8px;font-weight:600;font-size:14px;text-decoration:none;';
+        el.appendChild(btn);
+      }
     }
 
     document.getElementById('address-input').addEventListener('keydown', (e) => {
