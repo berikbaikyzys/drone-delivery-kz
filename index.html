@@ -1437,12 +1437,12 @@
     document.querySelectorAll('.step-card').forEach(card => observer.observe(card));
 
     // Mapbox map
-    const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmVyaWtiYWlreXp5cyIsImEiOiJjbXBwZHFoZHcwZGllMnFyNXJxMTI2c2h4In0.DabvTjHhd8LPjF9v6tGa1A';
+    const MAPBOX_TOKEN = window.MAPBOX_TOKEN || 'pk.eyJ1IjoiYmVyaWtiYWlreXp5cyIsImEiOiJjbXBwZHFoZHcwZGllMnFyNXJxMTI2c2h4In0.DabvTjHhd8LPjF9v6tGa1A';
     mapboxgl.accessToken = MAPBOX_TOKEN;
 
     const map = new mapboxgl.Map({
       container: 'delivery-map',
-      style: 'mapbox://styles/mapbox/light-v11',
+      style: 'mapbox://styles/mapbox/satellite-streets-v12',
       center: [76.9150, 43.2720],
       zoom: 13
     });
