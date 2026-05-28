@@ -7,6 +7,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+  <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
   <style>
     * {
       margin: 0;
@@ -690,6 +693,181 @@
       color: #5F5E5A;
     }
 
+    /* ── DELIVERY ZONE ── */
+    .delivery-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem 0;
+      background-color: #EDFBFF;
+      border-top: 1px solid rgba(11, 16, 21, 0.08);
+    }
+
+    .delivery-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .delivery-header h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #0B1015;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.5px;
+    }
+
+    .delivery-header p {
+      font-size: 1rem;
+      color: #5F5E5A;
+    }
+
+    .map-wrapper {
+      position: relative;
+      width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    #delivery-map {
+      width: 100%;
+      height: 500px;
+    }
+
+    .address-checker {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      z-index: 10;
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+      min-width: 300px;
+      max-width: 360px;
+    }
+
+    .address-checker h4 {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: #0B1015;
+      margin-bottom: 0.75rem;
+    }
+
+    .address-checker-row {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .address-checker input {
+      flex: 1;
+      padding: 0.6rem 0.85rem;
+      font-size: 0.875rem;
+      font-family: inherit;
+      color: #0B1015;
+      border: 1px solid rgba(11, 16, 21, 0.18);
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .address-checker input::placeholder {
+      color: #b0b5bc;
+    }
+
+    .address-checker input:focus {
+      border-color: #02B140;
+    }
+
+    .address-checker button {
+      padding: 0.6rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      font-family: inherit;
+      color: #fff;
+      background: #02B140;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+
+    .address-checker button:hover {
+      background: #03c948;
+    }
+
+    #address-result {
+      display: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-top: 0.65rem;
+      line-height: 1.4;
+    }
+
+    .demo-spots {
+      margin-top: 0.5rem;
+    }
+
+    .demo-spots-header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .demo-spots-header h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #0B1015;
+      margin-bottom: 0.4rem;
+    }
+
+    .demo-spots-header p {
+      font-size: 0.9rem;
+      color: #5F5E5A;
+    }
+
+    .demo-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .demo-card {
+      background: #fff;
+      border: 1px solid rgba(11, 16, 21, 0.08);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .demo-card:hover {
+      box-shadow: 0 8px 24px rgba(11, 16, 21, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .demo-card-icon {
+      font-size: 1.4rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .demo-card-body strong {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #0B1015;
+      margin-bottom: 0.2rem;
+    }
+
+    .demo-card-body span {
+      font-size: 0.82rem;
+      color: #5F5E5A;
+    }
+
     /* ── FAQ ── */
     .faq-section {
       min-height: 100vh;
@@ -840,6 +1018,31 @@
       }
 
       .steps-header h2 {
+        font-size: 1.6rem;
+      }
+
+      #delivery-map {
+        height: 350px;
+      }
+
+      .address-checker {
+        position: static;
+        max-width: 100%;
+        min-width: unset;
+        margin-bottom: 1rem;
+        border-radius: 12px;
+      }
+
+      .map-wrapper {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .demo-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .delivery-header h2 {
         font-size: 1.6rem;
       }
 
@@ -1019,11 +1222,57 @@
     </div>
   </section>
 
-  <section class="section" id="delivery-zone">
+  <section class="delivery-section" id="delivery-zone">
     <div class="container">
-      <div class="section-badge">Карта</div>
-      <h2>Зона доставки</h2>
-      <p>Скоро здесь появится карта покрытия</p>
+
+      <div class="delivery-header">
+        <div class="section-badge">Карта</div>
+        <h2>Зона доставки</h2>
+        <p>Проверьте, доступна ли доставка дроном по вашему адресу</p>
+      </div>
+
+      <div class="map-wrapper">
+        <div class="address-checker">
+          <h4>Проверить адрес доставки</h4>
+          <div class="address-checker-row">
+            <input type="text" id="address-input" placeholder="Введите ваш адрес в Алматы">
+            <button onclick="checkAddress()">Проверить</button>
+          </div>
+          <div id="address-result"></div>
+        </div>
+        <div id="delivery-map"></div>
+      </div>
+
+      <div class="demo-spots">
+        <div class="demo-spots-header">
+          <h3>Демо-площадки в Алматы</h3>
+          <p>Укажите один из этих адресов при оформлении заказа</p>
+        </div>
+        <div class="demo-cards">
+          <div class="demo-card">
+            <div class="demo-card-icon">📍</div>
+            <div class="demo-card-body">
+              <strong>Байзакова, 280</strong>
+              <span>Pick-up point</span>
+            </div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-icon">📍</div>
+            <div class="demo-card-body">
+              <strong>Панфилова, 92</strong>
+              <span>Демо-площадка</span>
+            </div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-icon">📍</div>
+            <div class="demo-card-body">
+              <strong>Жибек Жолы, 135</strong>
+              <span>Демо-площадка</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -1186,6 +1435,77 @@
     }, { threshold: 0.15 });
 
     document.querySelectorAll('.step-card').forEach(card => observer.observe(card));
+
+    // Mapbox map
+    const MAPBOX_TOKEN = 'pk.eyJ1IjoiYmVyaWtiYWlreXp5cyIsImEiOiJjbXBwZHFoZHcwZGllMnFyNXJxMTI2c2h4In0.DabvTjHhd8LPjF9v6tGa1A';
+    mapboxgl.accessToken = MAPBOX_TOKEN;
+
+    const map = new mapboxgl.Map({
+      container: 'delivery-map',
+      style: 'mapbox://styles/mapbox/light-v11',
+      center: [76.9150, 43.2720],
+      zoom: 13
+    });
+
+    map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
+
+    map.on('load', () => {
+      fetch('delivery-zone.geojson')
+        .then(r => r.json())
+        .then(data => {
+          map.addSource('delivery-zone', { type: 'geojson', data });
+          map.addLayer({ id: 'zone-fill', type: 'fill', source: 'delivery-zone',
+            paint: { 'fill-color': '#22c55e', 'fill-opacity': 0.15 } });
+          map.addLayer({ id: 'zone-border', type: 'line', source: 'delivery-zone',
+            paint: { 'line-color': '#22c55e', 'line-width': 2, 'line-opacity': 0.8 } });
+        });
+    });
+
+    // Address checker
+    let cachedZone = null;
+
+    async function checkAddress() {
+      const query = document.getElementById('address-input').value.trim();
+      if (!query) return;
+
+      const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(query + ' Алматы')}.json?access_token=${MAPBOX_TOKEN}&country=kz&limit=1`;
+      const res = await fetch(url);
+      const data = await res.json();
+
+      if (!data.features || !data.features.length) {
+        showResult(false, '❌ Адрес не найден. Уточните запрос.');
+        return;
+      }
+
+      const [lng, lat] = data.features[0].center;
+
+      map.flyTo({ center: [lng, lat], zoom: 15 });
+      new mapboxgl.Marker({ color: '#02B140' }).setLngLat([lng, lat]).addTo(map);
+
+      if (!cachedZone) {
+        cachedZone = await fetch('delivery-zone.geojson').then(r => r.json());
+      }
+      const point = turf.point([lng, lat]);
+      const polygon = cachedZone.features[0];
+      const inside = turf.booleanPointInPolygon(point, polygon);
+
+      if (inside) {
+        showResult(true, '✅ Отлично! Доставка дроном доступна по вашему адресу.');
+      } else {
+        showResult(false, '❌ К сожалению, ваш адрес пока вне зоны доставки. Мы расширяемся!');
+      }
+    }
+
+    function showResult(success, text) {
+      const el = document.getElementById('address-result');
+      el.textContent = text;
+      el.style.color = success ? '#16a34a' : '#dc2626';
+      el.style.display = 'block';
+    }
+
+    document.getElementById('address-input').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') checkAddress();
+    });
 
     // Form submission
     const form = document.getElementById('contact-form');
