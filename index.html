@@ -739,7 +739,7 @@
       position: absolute;
       top: 16px;
       left: 16px;
-      z-index: 10;
+      z-index: 1000;
       background: #fff;
       border-radius: 12px;
       padding: 16px;
@@ -1026,16 +1026,17 @@
       }
 
       .address-checker {
-        position: static;
-        max-width: 100%;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        max-width: calc(100% - 20px);
         min-width: unset;
-        margin-bottom: 1rem;
-        border-radius: 12px;
+        z-index: 1000;
       }
 
       .map-wrapper {
-        display: flex;
-        flex-direction: column;
+        position: relative;
       }
 
       .demo-cards {
@@ -1486,7 +1487,7 @@
     });
 
     let clickMarker = null;
-    map.on('click', async function(e) {
+    map.on('click', function(e) {
       const { lat, lng } = e.latlng;
       if (clickMarker) map.removeLayer(clickMarker);
       clickMarker = L.marker([lat, lng]).addTo(map);
@@ -1496,6 +1497,7 @@
       const polygon = deliveryGeoJSON.features[0];
       const inside = turf.booleanPointInPolygon(point, polygon);
 
+      // Шаг 1 — мгновенный попап
       clickMarker.bindPopup(inside ? '✅ Доставка доступна' : '❌ Вне зоны доставки').openPopup();
 
       if (typeof showResult === 'function') {
@@ -1503,6 +1505,19 @@
           inside ? '✅ Доставка дроном доступна по выбранному адресу.'
                  : '❌ Выбранный адрес пока вне зоны доставки.');
       }
+
+      // Шаг 2 — асинхронно обновляем адрес
+      fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
+        .then(r => r.json())
+        .then(data => {
+          const addr = data.road
+            ? `${data.road}${data.house_number ? ', ' + data.house_number : ''}`
+            : `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
+          clickMarker.setPopupContent(inside
+            ? `✅ Доставка доступна<br><small>${addr}</small>`
+            : `❌ Вне зоны доставки<br><small>${addr}</small>`
+          );
+        });
     });
 
     const hint = L.control({ position: 'bottomleft' });
