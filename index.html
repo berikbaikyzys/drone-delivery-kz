@@ -1255,21 +1255,21 @@
           <p>Укажите один из этих адресов при оформлении заказа</p>
         </div>
         <div class="demo-cards">
-          <div class="demo-card">
+          <div class="demo-card spot-card">
             <div class="demo-card-icon">📍</div>
             <div class="demo-card-body">
               <strong>Байзакова, 280</strong>
               <span>Pick-up point</span>
             </div>
           </div>
-          <div class="demo-card">
+          <div class="demo-card spot-card">
             <div class="demo-card-icon">📍</div>
             <div class="demo-card-body">
               <strong>Панфилова, 92</strong>
               <span>Демо-площадка</span>
             </div>
           </div>
-          <div class="demo-card">
+          <div class="demo-card spot-card">
             <div class="demo-card-icon">📍</div>
             <div class="demo-card-body">
               <strong>Жибек Жолы, 135</strong>
@@ -1503,10 +1503,24 @@
       { coords: [43.261279, 76.929531], name: 'Жибек Жолы, 135', desc: 'Демо-площадка · угол Масанчи' },
       { coords: [43.258467, 76.944637], name: 'Панфилова, 92', desc: 'Демо-площадка · угол Айтеке би' },
     ];
-    spots.forEach(s => {
-      L.marker(s.coords, { icon: starIcon })
+    const spotMarkers = [];
+    spots.forEach((s, i) => {
+      const marker = L.marker(s.coords, { icon: starIcon })
         .addTo(map)
         .bindPopup(`<b>${s.name}</b><br>${s.desc}`);
+      spotMarkers.push(marker);
+    });
+
+    document.querySelectorAll('.spot-card').forEach((card, i) => {
+      card.style.cursor = 'pointer';
+      card.style.transition = 'box-shadow 0.2s';
+      card.addEventListener('click', () => {
+        const spot = spots[i];
+        map.flyTo(spot.coords, 16, { duration: 1 });
+        spotMarkers[i].openPopup();
+      });
+      card.addEventListener('mouseenter', () => card.style.boxShadow = '0 4px 16px rgba(2,177,64,0.2)');
+      card.addEventListener('mouseleave', () => card.style.boxShadow = '');
     });
 
     let clickMarker = null;
