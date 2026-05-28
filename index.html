@@ -1437,42 +1437,81 @@
     document.querySelectorAll('.step-card').forEach(card => observer.observe(card));
 
     // Leaflet map
-    const map = L.map('map', { zoomControl: true }).setView([43.2720, 76.9150], 13);
+    const map = L.map('map', { zoomControl: false }).setView([43.2650, 76.9350], 13);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors',
+    L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      maxZoom: 19, attribution: 'Tiles © Esri'
+    }).addTo(map);
+
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}', {
       maxZoom: 19
     }).addTo(map);
+
+    let deliveryGeoJSON = null;
+    let deliveryLayer = null;
 
     fetch('delivery-zone.geojson')
       .then(r => r.json())
       .then(data => {
-        L.geoJSON(data, {
+        deliveryGeoJSON = data;
+        deliveryLayer = L.geoJSON(data, {
           style: {
-            color: '#22c55e',
-            weight: 2,
-            opacity: 0.8,
-            fillColor: '#22c55e',
-            fillOpacity: 0.15
+            color: '#27C840',
+            weight: 3,
+            opacity: 0.9,
+            fillColor: '#27C840',
+            fillOpacity: 0.25,
+            dashArray: '8, 4'
           }
         }).addTo(map);
+        map.fitBounds(deliveryLayer.getBounds(), { padding: [40, 40] });
       });
 
     const greenIcon = L.divIcon({
-      html: '<div style="background:#22c55e;width:14px;height:14px;border-radius:50%;border:2px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.3)"></div>',
+      html: '<div style="background:#27C840;width:14px;height:14px;border-radius:50%;border:2px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.4)"></div>',
       iconSize: [14, 14], iconAnchor: [7, 7], className: ''
     });
 
     const spots = [
-      { coords: [43.2558, 76.9285], name: 'Байзакова, 280', desc: 'Pick-up point' },
-      { coords: [43.2650, 76.9192], name: 'Панфилова, 92', desc: 'Демо-площадка' },
-      { coords: [43.2590, 76.9450], name: 'Жибек Жолы, 135', desc: 'Демо-площадка' },
+      { coords: [43.2388, 76.9052], name: 'Байзакова, 280', desc: 'Pick-up point · БЦ Almaty Towers' },
+      { coords: [43.2568, 76.9192], name: 'Панфилова, 92',  desc: 'Демо-площадка · угол Айтеке би' },
+      { coords: [43.2524, 76.9456], name: 'Жибек Жолы, 135', desc: 'Демо-площадка · угол Масанчи' },
     ];
     spots.forEach(s => {
       L.marker(s.coords, { icon: greenIcon })
         .addTo(map)
         .bindPopup(`<b>${s.name}</b><br>${s.desc}`);
     });
+
+    let clickMarker = null;
+    map.on('click', async function(e) {
+      const { lat, lng } = e.latlng;
+      if (clickMarker) map.removeLayer(clickMarker);
+      clickMarker = L.marker([lat, lng]).addTo(map);
+
+      if (!deliveryGeoJSON) return;
+      const point = turf.point([lng, lat]);
+      const polygon = deliveryGeoJSON.features[0];
+      const inside = turf.booleanPointInPolygon(point, polygon);
+
+      clickMarker.bindPopup(inside ? '✅ Доставка доступна' : '❌ Вне зоны доставки').openPopup();
+
+      if (typeof showResult === 'function') {
+        showResult(inside,
+          inside ? '✅ Доставка дроном доступна по выбранному адресу.'
+                 : '❌ Выбранный адрес пока вне зоны доставки.');
+      }
+    });
+
+    const hint = L.control({ position: 'bottomleft' });
+    hint.onAdd = function() {
+      const d = L.DomUtil.create('div');
+      d.innerHTML = '<div style="background:rgba(0,0,0,0.6);color:white;padding:6px 10px;border-radius:8px;font-size:12px">🖱️ Нажмите на карту для проверки адреса</div>';
+      return d;
+    };
+    hint.addTo(map);
 
     // Address checker
     let cachedZone = null;
