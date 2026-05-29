@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Памятка по технике безопасности — Freedom X Drone Delivery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      background-color: #EDFBFF;
+      color: #0B1015;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 64px; background: #EDFBFF;
+      border-bottom: 1px solid rgba(11, 16, 21, 0.08);
+    }
+    .header .container { display: flex; align-items: center; height: 100%; }
+
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+    .logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; flex-shrink: 0; }
+    .nav { display: flex; align-items: center; gap: 2rem; margin-left: auto; }
+    .nav-link { font-size: 0.9rem; font-weight: 600; color: #0B1015; text-decoration: none; transition: color 0.2s; }
+    .nav-link:hover { color: #02B140; }
+    .btn-nav {
+      padding: 0.55rem 1.4rem; font-size: 0.9rem; font-weight: 600; font-family: inherit;
+      color: #fff; background: #02B140; border: none; border-radius: 50px;
+      cursor: pointer; text-decoration: none; transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .btn-nav:hover { background: #03c948; transform: translateY(-2px); }
+
+    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; margin-left: auto; padding: 4px; background: none; border: none; }
+    .burger span { display: block; width: 24px; height: 2px; background: #0B1015; border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
+    .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .burger.open span:nth-child(2) { opacity: 0; }
+    .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none; position: fixed; top: 64px; left: 0; right: 0; z-index: 99;
+      background: #EDFBFF; border-bottom: 1px solid rgba(11, 16, 21, 0.08);
+      padding: 1.5rem 0 2rem; flex-direction: column; gap: 1.25rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu .container { display: flex; flex-direction: column; gap: 1.25rem; }
+    .mobile-menu a { font-size: 1rem; font-weight: 600; color: #0B1015; text-decoration: none; padding: 0.5rem 0; border-bottom: 1px solid rgba(11, 16, 21, 0.07); transition: color 0.2s; }
+    .mobile-menu a:hover { color: #02B140; }
+    .mobile-menu .btn-nav { text-align: center; margin-top: 0.5rem; padding: 0.85rem; border-bottom: none; color: #fff; }
+
+    /* ── DOCUMENT ── */
+    .doc-hero {
+      padding: 120px 0 48px;
+      border-bottom: 1px solid rgba(11, 16, 21, 0.08);
+    }
+    .doc-hero h1 { font-size: 2.8rem; font-weight: 800; color: #0B1015; letter-spacing: -1px; margin-bottom: 0.4rem; }
+    .doc-hero .sub { font-size: 1.05rem; color: #5F5E5A; margin-bottom: 0.5rem; line-height: 1.5; }
+    .doc-hero .org { font-size: 0.9rem; font-weight: 600; color: #0B1015; }
+
+    .doc-body { padding: 3rem 0 6rem; }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.9rem; font-weight: 600; color: #5F5E5A;
+      text-decoration: none; margin-bottom: 2.5rem; transition: color 0.2s;
+    }
+    .back-link:hover { color: #02B140; }
+
+    .doc-intro {
+      font-size: 0.95rem; color: #5F5E5A; line-height: 1.7;
+      margin-bottom: 3rem; padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(11, 16, 21, 0.08);
+    }
+
+    .doc-section { margin-bottom: 3rem; }
+    .doc-section h2 {
+      font-size: 1.2rem; font-weight: 700; color: #02B140;
+      margin-bottom: 1rem; padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(2, 177, 64, 0.15);
+    }
+    .doc-section p { font-size: 0.95rem; color: #334155; line-height: 1.7; margin-bottom: 0.85rem; }
+    .doc-section ul, .doc-section ol { padding-left: 1.5rem; margin-bottom: 0.85rem; }
+    .doc-section li { font-size: 0.95rem; color: #334155; line-height: 1.7; margin-bottom: 0.45rem; }
+    .doc-section strong { color: #0B1015; font-weight: 600; }
+
+    .warning-box {
+      background: rgba(245, 158, 11, 0.07);
+      border-left: 3px solid #F59E0B;
+      border-radius: 0 10px 10px 0;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+      color: #334155;
+      line-height: 1.6;
+    }
+    .warning-box strong { color: #92610A; }
+
+    .danger-box {
+      background: rgba(239, 68, 68, 0.06);
+      border-left: 3px solid #ef4444;
+      border-radius: 0 10px 10px 0;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    .contact-card {
+      background: #fff;
+      border: 1px solid rgba(11, 16, 21, 0.08);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-top: 1rem;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+
+    .contact-item { display: flex; flex-direction: column; gap: 0.25rem; }
+    .contact-item .label { font-size: 0.78rem; font-weight: 600; color: #5F5E5A; text-transform: uppercase; letter-spacing: 0.08em; }
+    .contact-item .value { font-size: 1rem; font-weight: 700; color: #0B1015; }
+    .contact-item a { color: #02B140; text-decoration: none; }
+    .contact-item .emergency { color: #ef4444; }
+
+    @media (max-width: 768px) {
+      .container { padding: 0 16px; }
+      .nav { display: none; }
+      .burger { display: flex; }
+      .doc-hero h1 { font-size: 1.9rem; }
+      .doc-hero { padding: 100px 0 36px; }
+      .contact-card { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <img src="logo.png" alt="Freedom" height="36" style="width:auto;">
+      </a>
+      <nav class="nav">
+        <a href="index.html#how-it-works" class="nav-link">Как работает</a>
+        <a href="index.html#delivery-zone" class="nav-link">Зона доставки</a>
+        <a href="index.html#faq" class="nav-link">FAQ</a>
+        <a href="index.html#try-it" class="btn-nav">Попробовать</a>
+      </nav>
+      <button class="burger" id="burger" aria-label="Меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="container">
+      <a href="index.html#how-it-works">Как работает</a>
+      <a href="index.html#delivery-zone">Зона доставки</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="index.html#try-it" class="btn-nav">Попробовать</a>
+    </div>
+  </div>
+
+  <div class="doc-hero">
+    <div class="container">
+      <h1>Памятка по технике безопасности</h1>
+      <p class="sub">при получении посылок с помощью беспилотного авиационного средства (дрона)</p>
+      <p class="org">ТОО «Робонексус»</p>
+    </div>
+  </div>
+
+  <div class="doc-body">
+    <div class="container">
+
+      <a href="index.html#try-it" class="back-link">← Вернуться на главную</a>
+
+      <div class="doc-section">
+        <h2>Общие предупреждения</h2>
+        <p>Обращаем внимание пользователей – Дрон является техническим устройством повышенной опасности. Эксплуатация осуществляется в соответствии с законодательством РК о беспилотных авиационных системах. ТОО «Робонексус» несёт ответственность за безопасность полётов в пределах, установленных применимым законодательством.</p>
+        <p>Пользователь обязан:</p>
+        <ul>
+          <li>Соблюдать все инструкции, направленные сервисом перед доставкой.</li>
+          <li>Не взаимодействовать с дроном без необходимости – это запрещено и опасно.</li>
+          <li>Обеспечить безопасные условия в зоне приёма посылки.</li>
+          <li>Незамедлительно сообщить оператору о любой нештатной ситуации.</li>
+        </ul>
+        <p>Используя сервис, вы подтверждаете, что ознакомлены с настоящей Памяткой и принимаете на себя обязанность соблюдать её требования.</p>
+      </div>
+
+      <div class="doc-section">
+        <h2>Подготовка зоны доставки</h2>
+        <div class="warning-box">
+          <strong>Важно:</strong> подготовьте зону заблаговременно. Дрон начнёт снижение автоматически. Переоборудовать зону после начала манёвра невозможно.
+        </div>
+        <p><strong>Требования к зоне:</strong></p>
+        <ul>
+          <li>Открытое пространство не менее 5×5 метров без препятствий.</li>
+          <li>Отсутствие людей, детей и животных в радиусе посадки.</li>
+          <li>Отсутствие деревьев, проводов, конструкций над зоной и рядом с ней.</li>
+          <li>Горизонтальная поверхность без выраженного уклона.</li>
+          <li>Хорошая видимость – без густого тумана, дыма, сильного снегопада.</li>
+        </ul>
+        <p><strong>Перед каждой доставкой проверьте:</strong></p>
+        <ul>
+          <li>Зона свободна – нет людей и животных.</li>
+          <li>Нет препятствий над зоной и вокруг неё.</li>
+          <li>Дети находятся в здании или удалены на безопасное расстояние.</li>
+          <li>Животные удерживаются или изолированы.</li>
+          <li>Поверхность ровная и чистая.</li>
+          <li>Вы получили уведомление о прибытии дрона.</li>
+        </ul>
+      </div>
+
+      <div class="doc-section">
+        <h2>Запрещённые действия</h2>
+        <div class="danger-box">
+          Ниже описанные действия влекут за собой ответственность – нарушение может привести к травме, повреждению дрона и юридической ответственности пользователя.
+        </div>
+        <ul>
+          <li>Приближаться к дрону во время полёта, снижения и посадки.</li>
+          <li>Касаться дрона – лопасти вращаются на высокой скорости даже после приземления.</li>
+          <li>Пытаться поймать, перехватить или изменить траекторию дрона.</li>
+          <li>Мешать посадке или взлёту – стоять в посадочной зоне.</li>
+          <li>Направлять на дрон лазерные указки, фонари, зеркала и иные предметы.</li>
+          <li>Запускать вблизи другие беспилотные авиационные средства.</li>
+          <li>Бросать в дрон или рядом с ним какие-либо предметы.</li>
+          <li>Трогать груз до полной остановки дрона и получения уведомления от сервиса.</li>
+        </ul>
+      </div>
+
+      <div class="doc-section">
+        <h2>Дети и животные</h2>
+        <ul>
+          <li>Дети до 18 лет не должны находиться в зоне доставки без сопровождения взрослого.</li>
+          <li>Маленькие дети должны находиться в здании или на безопасном расстоянии (не менее 15 метров).</li>
+          <li>Домашних животных необходимо держать на поводке или изолировать в помещении.</li>
+          <li>Пользователь обязан обеспечить, чтобы никто посторонний не вышел в зону доставки в момент прибытия дрона.</li>
+        </ul>
+      </div>
+
+      <div class="doc-section">
+        <h2>Погодные и внешние условия</h2>
+        <p>ТОО «Робонексус» осуществляет полёты только в допустимых метеоусловиях. Безопасность имеет приоритет над скоростью доставки.</p>
+        <p>Доставка может быть отменена или отложена при:</p>
+        <ul>
+          <li>Скорости ветра, превышающей допустимые технические параметры дрона.</li>
+          <li>Густом тумане, сильном снегопаде, грозе или экстремальных осадках.</li>
+          <li>Ограничениях использования воздушного пространства (временные зоны).</li>
+          <li>Иных угрозах безопасности полёта, определяемых оператором.</li>
+        </ul>
+        <div class="warning-box">
+          <strong>Обратите внимание:</strong> отмена доставки по соображениям безопасности не является нарушением условий сервиса. Вы получите уведомление и возможность перенести доставку. Форс-мажорные обстоятельства освобождают ТОО «Робонексус» от ответственности за задержку в соответствии с Гражданским кодексом РК.
+        </div>
+      </div>
+
+      <div class="doc-section">
+        <h2>Действия при нештатной ситуации</h2>
+        <p><strong>При падении или аварийной посадке дрона:</strong></p>
+        <ul>
+          <li>Не приближайтесь к упавшему дрону – возможна угроза от вращающихся лопастей или повреждённой конструкции.</li>
+          <li>Не пытайтесь самостоятельно перемещать, поднимать или разбирать устройство.</li>
+          <li>Немедленно позвоните в службу поддержки ТОО «Робонексус».</li>
+          <li>Обеспечьте безопасное расстояние для всех присутствующих – не менее 15 метров.</li>
+        </ul>
+        <p><strong>При возгорании дрона:</strong></p>
+        <ul>
+          <li>Немедленно отойдите и уведите всех людей на расстояние не менее 50 метров.</li>
+          <li>Вызовите экстренные службы: 101 (пожарная служба), 112 (единый номер).</li>
+          <li>Не пытайтесь самостоятельно тушить аккумулятор дрона.</li>
+          <li>Сообщите в службу поддержки ТОО «Робонексус» сразу после обеспечения безопасности.</li>
+        </ul>
+        <p><strong>При любой нештатной ситуации:</strong></p>
+        <ul>
+          <li>Зафиксируйте место произошедшего и обстоятельства (по возможности).</li>
+          <li>Не изменяйте положение устройства до прибытия представителей компании или экстренных служб.</li>
+          <li>Сохраните контактные данные свидетелей.</li>
+        </ul>
+      </div>
+
+      <div class="doc-section">
+        <h2>Ограничения сервиса</h2>
+        <p>ТОО «Робонексус» оставляет за собой право:</p>
+        <ul>
+          <li>Отказать в доставке или отменить её на любом этапе по соображениям безопасности, без штрафных санкций для компании.</li>
+          <li>Ограничить доставку в определённые локации, в том числе вблизи аэропортов, государственных объектов, особо охраняемых зон и иных территорий, предусмотренных законодательством РК.</li>
+          <li>Ввести временные ограничения по техническим или погодным причинам.</li>
+          <li>Требовать от пользователя подтверждения соответствия места доставки требованиям безопасности.</li>
+        </ul>
+      </div>
+
+      <div class="doc-section">
+        <h2>Контакты службы поддержки</h2>
+        <div class="contact-card">
+          <div class="contact-item">
+            <span class="label">Телефон горячей линии</span>
+            <span class="value"><a href="tel:+77775477557">+7 777 547 75 57</a></span>
+          </div>
+          <div class="contact-item">
+            <span class="label">Email поддержки</span>
+            <span class="value"><a href="mailto:info@robonexus.kz">info@robonexus.kz</a></span>
+          </div>
+          <div class="contact-item">
+            <span class="label">Сайт</span>
+            <span class="value"><a href="https://www.robonexus.kz" target="_blank">www.robonexus.kz</a></span>
+          </div>
+          <div class="contact-item">
+            <span class="label">Экстренные службы</span>
+            <span class="value emergency">101 — Пожарная служба &nbsp;|&nbsp; 112 — Единый экстренный номер</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const burger = document.getElementById('burger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        burger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
+  </script>
+</body>
+</html>
