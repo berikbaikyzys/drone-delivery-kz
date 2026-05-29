@@ -551,10 +551,64 @@
     .form-card {
       background: #fff;
       border-radius: 20px;
-      padding: 3rem;
+      padding: 2.5rem 2.5rem 2.5rem 2.5rem;
       width: 100%;
-      max-width: 520px;
+      max-width: 960px;
       box-shadow: 0 4px 32px rgba(11, 16, 21, 0.07);
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+      gap: 0;
+      align-items: start;
+    }
+
+    .form-col {
+      padding: 0 2.5rem 0 0;
+    }
+
+    .form-divider {
+      background: #e2e8f0;
+      align-self: stretch;
+    }
+
+    .qr-col {
+      padding: 0 0 0 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .qr-col h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #0B1015;
+      margin-bottom: 0.4rem;
+    }
+
+    .qr-col .qr-col-sub {
+      font-size: 0.875rem;
+      color: #5F5E5A;
+      margin-bottom: 1.5rem;
+    }
+
+    .qr-col .qr-frame {
+      border: 1px solid rgba(11, 16, 21, 0.1);
+      border-radius: 16px;
+      padding: 12px;
+      background: #f8fafc;
+      box-shadow: 0 2px 12px rgba(11, 16, 21, 0.06);
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+
+    .qr-col .qr-frame img {
+      display: block;
+      border-radius: 8px;
+    }
+
+    .qr-col .qr-hint {
+      font-size: 0.8rem;
+      color: #5F5E5A;
     }
 
     .form-card .section-badge {
@@ -1136,7 +1190,22 @@
       }
 
       .form-card {
-        padding: 2rem 1.5rem;
+        grid-template-columns: 1fr;
+        padding: 1.5rem;
+      }
+
+      .form-col {
+        padding: 0 0 2rem 0;
+      }
+
+      .form-divider {
+        height: 1px;
+        width: 100%;
+        margin-bottom: 2rem;
+      }
+
+      .qr-col {
+        padding: 0;
       }
 
       .form-card h2 {
@@ -1344,47 +1413,65 @@
     </div>
   </section>
 
-  <!-- FORM SECTION -->
+  <!-- FORM + QR SECTION -->
   <section class="form-section" id="try-it">
     <div class="container">
       <div class="form-card">
-        <div class="section-badge">Заявка</div>
-        <h2>Попробуйте доставку дроном</h2>
-        <p class="form-subtitle">Оставьте заявку и мы свяжемся с вами для пробного заказа дроном</p>
 
-        <form id="contact-form" action="https://formspree.io/f/FORM_ID" method="POST">
-          <div class="form-group">
-            <label for="name">Имя</label>
-            <input type="text" id="name" name="name" placeholder="Ваше имя" required>
+        <!-- Левая колонка: форма -->
+        <div class="form-col">
+          <div class="section-badge">Заявка</div>
+          <h2>Попробуйте доставку дроном</h2>
+          <p class="form-subtitle">Оставьте заявку и мы свяжемся с вами для пробного заказа дроном</p>
+
+          <form id="contact-form" action="https://formspree.io/f/FORM_ID" method="POST">
+            <div class="form-group">
+              <label for="name">Имя</label>
+              <input type="text" id="name" name="name" placeholder="Ваше имя" required>
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Телефон</label>
+              <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" required>
+            </div>
+
+            <div class="form-group">
+              <label for="address">Адрес доставки</label>
+              <input type="text" id="address" name="address" placeholder="Улица, дом, квартира" required>
+            </div>
+
+            <label class="form-checkbox">
+              <input type="checkbox" name="consent" required>
+              <span>Соглашаюсь с <a href="#">Правилами использования сервиса</a> и <a href="#">Политикой конфиденциальности</a></span>
+            </label>
+
+            <button type="submit" class="btn-submit">Отправить заявку</button>
+          </form>
+
+          <div class="form-success" id="form-success">
+            <div class="success-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="#02B140" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Спасибо!</h3>
+            <p>Мы свяжемся с вами в ближайшее время</p>
           </div>
-
-          <div class="form-group">
-            <label for="phone">Телефон</label>
-            <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" required>
-          </div>
-
-          <div class="form-group">
-            <label for="address">Адрес доставки</label>
-            <input type="text" id="address" name="address" placeholder="Улица, дом, квартира" required>
-          </div>
-
-          <label class="form-checkbox">
-            <input type="checkbox" name="consent" required>
-            <span>Соглашаюсь с <a href="#">Правилами использования сервиса</a> и <a href="#">Политикой конфиденциальности</a></span>
-          </label>
-
-          <button type="submit" class="btn-submit">Отправить заявку</button>
-        </form>
-
-        <div class="form-success" id="form-success">
-          <div class="success-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M5 13l4 4L19 7" stroke="#02B140" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <h3>Спасибо!</h3>
-          <p>Мы свяжемся с вами в ближайшее время</p>
         </div>
+
+        <!-- Разделитель -->
+        <div class="form-divider"></div>
+
+        <!-- Правая колонка: QR -->
+        <div class="qr-col">
+          <h3>Или закажите через приложение</h3>
+          <p class="qr-col-sub">Отсканируйте QR-код камерой телефона</p>
+          <div class="qr-frame">
+            <img src="Arbuz_QR.jpg" alt="QR код Freedom SuperApp" style="width:180px;height:180px;">
+          </div>
+          <p class="qr-hint">Доставка дроном доступна в Freedom SuperApp</p>
+        </div>
+
       </div>
     </div>
   </section>
@@ -1450,19 +1537,6 @@
         </div>
 
       </div>
-    </div>
-  </section>
-
-  <!-- QR SECTION -->
-  <section class="qr-section" id="superapp">
-    <div class="container">
-      <div class="section-badge">Приложение</div>
-      <h2>Закажите доставку продуктов дроном через Freedom SuperApp</h2>
-      <p class="qr-subtitle">Отсканируйте QR-код и оформите заказ с доставкой дроном</p>
-      <div class="qr-frame">
-        <img src="Arbuz_QR.jpg" alt="QR код Freedom SuperApp" style="width:200px;height:200px;border-radius:8px;">
-      </div>
-      <p class="qr-hint">Наведите камеру телефона на QR-код</p>
     </div>
   </section>
 
