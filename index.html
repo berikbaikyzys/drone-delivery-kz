@@ -974,6 +974,59 @@
       padding-bottom: 1.25rem;
     }
 
+    /* ── QR SECTION ── */
+    .qr-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 0;
+      background-color: #EDFBFF;
+      border-top: 1px solid rgba(11, 16, 21, 0.08);
+    }
+
+    .qr-section .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .qr-section h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #0B1015;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.5px;
+    }
+
+    .qr-section .qr-subtitle {
+      font-size: 1rem;
+      color: #5F5E5A;
+      margin-bottom: 2.5rem;
+    }
+
+    .qr-frame {
+      border: 1px solid rgba(11, 16, 21, 0.1);
+      border-radius: 16px;
+      padding: 16px;
+      background: #fff;
+      box-shadow: 0 4px 24px rgba(11, 16, 21, 0.07);
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+
+    .qr-frame img {
+      display: block;
+      border-radius: 8px;
+    }
+
+    .qr-hint {
+      font-size: 0.85rem;
+      color: #5F5E5A;
+    }
+
     /* ── MOBILE ── */
     @media (max-width: 768px) {
       .container {
@@ -1049,6 +1102,15 @@
 
       .delivery-header h2 {
         font-size: 1.6rem;
+      }
+
+      .qr-section h2 {
+        font-size: 1.6rem;
+      }
+
+      .qr-frame img {
+        width: 160px !important;
+        height: 160px !important;
       }
 
       .steps-grid {
@@ -1388,6 +1450,19 @@
         </div>
 
       </div>
+    </div>
+  </section>
+
+  <!-- QR SECTION -->
+  <section class="qr-section" id="superapp">
+    <div class="container">
+      <div class="section-badge">Приложение</div>
+      <h2>Заказывайте продукты через Freedom SuperApp</h2>
+      <p class="qr-subtitle">Отсканируйте QR-код и оформите заказ с доставкой дроном</p>
+      <div class="qr-frame">
+        <img src="Arbuz_QR.jpg" alt="QR код Freedom SuperApp" style="width:200px;height:200px;border-radius:8px;">
+      </div>
+      <p class="qr-hint">Наведите камеру телефона на QR-код</p>
     </div>
   </section>
 
