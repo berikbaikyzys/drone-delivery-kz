@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Политика конфиденциальности — Freedom X Drone Delivery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      background-color: #EDFBFF;
+      color: #0B1015;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 64px;
+      background: #EDFBFF;
+      border-bottom: 1px solid rgba(11, 16, 21, 0.08);
+    }
+
+    .header .container {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-left: auto;
+    }
+
+    .nav-link {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #0B1015;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover { color: #02B140; }
+
+    .btn-nav {
+      padding: 0.55rem 1.4rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      font-family: inherit;
+      color: #fff;
+      background: #02B140;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-nav:hover { background: #03c948; transform: translateY(-2px); }
+
+    .burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      margin-left: auto;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .burger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: #0B1015;
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .burger.open span:nth-child(2) { opacity: 0; }
+    .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 64px; left: 0; right: 0;
+      z-index: 99;
+      background: #EDFBFF;
+      border-bottom: 1px solid rgba(11, 16, 21, 0.08);
+      padding: 1.5rem 0 2rem;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu .container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .mobile-menu a {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #0B1015;
+      text-decoration: none;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(11, 16, 21, 0.07);
+      transition: color 0.2s;
+    }
+
+    .mobile-menu a:hover { color: #02B140; }
+
+    .mobile-menu .btn-nav {
+      text-align: center;
+      margin-top: 0.5rem;
+      padding: 0.85rem;
+      border-bottom: none;
+      color: #fff;
+    }
+
+    /* ── PRIVACY CONTENT ── */
+    .privacy-hero {
+      padding: 120px 0 48px;
+      border-bottom: 1px solid rgba(11, 16, 21, 0.08);
+      background: #EDFBFF;
+    }
+
+    .privacy-hero h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #0B1015;
+      letter-spacing: -1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .privacy-hero .org {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #0B1015;
+      margin-bottom: 0.4rem;
+    }
+
+    .privacy-hero .meta {
+      font-size: 0.85rem;
+      color: #5F5E5A;
+    }
+
+    .privacy-body {
+      padding: 3rem 0 6rem;
+    }
+
+    .privacy-body .container {
+      max-width: 880px;
+    }
+
+    .privacy-intro {
+      font-size: 1rem;
+      color: #5F5E5A;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(11, 16, 21, 0.08);
+    }
+
+    .privacy-section {
+      margin-bottom: 3rem;
+    }
+
+    .privacy-section h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #02B140;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(2, 177, 64, 0.15);
+    }
+
+    .privacy-section p {
+      font-size: 0.95rem;
+      color: #334155;
+      line-height: 1.7;
+      margin-bottom: 0.85rem;
+    }
+
+    .privacy-section ul,
+    .privacy-section ol {
+      padding-left: 1.5rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .privacy-section li {
+      font-size: 0.95rem;
+      color: #334155;
+      line-height: 1.7;
+      margin-bottom: 0.4rem;
+    }
+
+    .privacy-section strong {
+      color: #0B1015;
+      font-weight: 600;
+    }
+
+    .contact-block {
+      background: #fff;
+      border: 1px solid rgba(11, 16, 21, 0.08);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+      color: #334155;
+      line-height: 1.9;
+    }
+
+    .contact-block a {
+      color: #02B140;
+      text-decoration: none;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #5F5E5A;
+      text-decoration: none;
+      margin-bottom: 2.5rem;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover { color: #02B140; }
+
+    @media (max-width: 768px) {
+      .container { padding: 0 16px; }
+      .nav { display: none; }
+      .burger { display: flex; }
+      .privacy-hero h1 { font-size: 1.9rem; }
+      .privacy-hero { padding: 100px 0 36px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <img src="logo.png" alt="Freedom" height="36" style="width:auto;">
+      </a>
+      <nav class="nav">
+        <a href="index.html#how-it-works" class="nav-link">Как работает</a>
+        <a href="index.html#delivery-zone" class="nav-link">Зона доставки</a>
+        <a href="index.html#faq" class="nav-link">FAQ</a>
+        <a href="index.html#try-it" class="btn-nav">Попробовать</a>
+      </nav>
+      <button class="burger" id="burger" aria-label="Меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="container">
+      <a href="index.html#how-it-works">Как работает</a>
+      <a href="index.html#delivery-zone">Зона доставки</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="index.html#try-it" class="btn-nav">Попробовать</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="privacy-hero">
+    <div class="container">
+      <h1>Политика конфиденциальности</h1>
+      <p class="org">ТОО «Робонексус» — Сервис дрон-доставки</p>
+      <p class="meta">Редакция: 25 мая 2026 года &nbsp;|&nbsp; Республика Казахстан</p>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="privacy-body">
+    <div class="container">
+
+      <a href="index.html" class="back-link">← Вернуться на главную</a>
+
+      <p class="privacy-intro">
+        Настоящая Политика конфиденциальности (далее — «Политика») распространяется на всех пользователей интернет-ресурсов и сервисов ТОО «Робонексус» (далее — «Компания», «мы»). Она объясняет, какие данные мы собираем, зачем, как используем и что вы вправе потребовать.<br><br>
+        Используя сайт или сервис доставки, вы подтверждаете, что ознакомились с настоящей Политикой. Если вы не согласны — пожалуйста, не используйте наш сервис.
+      </p>
+
+      <div class="privacy-section">
+        <h2>1. Кто мы и как с нами связаться</h2>
+        <p>Компания является собственником и оператором базы персональных данных пользователей, определяет цели обработки и несёт ответственность за их соблюдение.</p>
+        <div class="contact-block">
+          <strong>Оператор:</strong> ТОО «Робонексус»<br>
+          <strong>БИН:</strong> 250440017198<br>
+          <strong>Юридический адрес:</strong> Город Алматы, Алмалинский район, ул. Шафик Чокина, д. 189, кв. 38<br>
+          <strong>E-mail:</strong> <a href="mailto:info@robonexus.kz">info@robonexus.kz</a><br>
+          <strong>Телефон:</strong> <a href="tel:+77775477557">+7 777 547 75 57</a><br>
+          <strong>Срок ответа на обращения:</strong> 15 рабочих дней
+        </div>
+      </div>
+
+      <div class="privacy-section">
+        <h2>2. Согласие пользователя</h2>
+        <p>Пользователь, использующий интернет-ресурсы и сервисы Компании, предоставляет согласие на сбор и обработку персональных данных в порядке, предусмотренном настоящей Политикой.</p>
+        <p>Согласие может быть выражено письменно, в форме электронного документа либо иным способом, позволяющим подтвердить его получение, в соответствии с требованиями законодательства Республики Казахстан. Компания хранит подтверждение согласия в случаях, предусмотренных законодательством.</p>
+        <p>Согласие можно отозвать в любой момент, направив обращение по контактам, указанным в разделе 1.</p>
+      </div>
+
+      <div class="privacy-section">
+        <h2>3. Перечень обрабатываемых данных</h2>
+        <p>Состав собираемых данных зависит от этапа, на котором вы взаимодействуете с нашим сервисом.</p>
+        <p><strong>Этап 1 — Лендинг и проверка зоны доставки</strong></p>
+        <ul>
+          <li>Адрес доставки, введённый вами в поле проверки зоны покрытия.</li>
+          <li>Приблизительные координаты устройства — только если вы разрешили браузеру определять местоположение.</li>
+          <li>Технические данные сессии: тип устройства и браузера, страну подключения, время визита.</li>
+          <li>Данные об IP-адресе — для геолокации в целях проверки зоны доставки.</li>
+        </ul>
+        <p><strong>Этап 2 — Тестовый заказ</strong></p>
+        <ul>
+          <li>Фамилия, имя, отчество.</li>
+          <li>Город проживания.</li>
+          <li>Номер мобильного телефона.</li>
+          <li>Адрес электронной почты.</li>
+          <li>Адрес доставки.</li>
+          <li>Пол и дата рождения при необходимости.</li>
+          <li>Информация об устройстве.</li>
+          <li>Переписка с Компанией через чат или иные каналы связи.</li>
+          <li>Фотографии — только по желанию пользователя и с его согласия.</li>
+        </ul>
+        <p>Реквизиты банковских карт мы не получаем и не храним — платёжные данные обрабатываются непосредственно платёжным провайдером.</p>
+        <p><strong>Этап 3 — Интеграция с Freedom SuperApp</strong></p>
+        <p>При редиректе или интеграции с Freedom SuperApp нам передаются данные, необходимые для завершения заказа. К данным, обрабатываемым на платформе Freedom, применяется политика конфиденциальности этого сервиса.</p>
+      </div>
+
+      <div class="privacy-section">
+        <h2>4. Цели обработки данных</h2>
+        <ul>
+          <li>Проверить, входит ли адрес пользователя в зону доставки дроном.</li>
+          <li>Оформить и исполнить заказ, уведомить о статусе доставки.</li>
+          <li>Обеспечить коммуникацию с пользователем посредством чата, электронной почты и СМС.</li>
+          <li>Разрешать споры, обрабатывать обратную связь, устранять неисправности.</li>
+          <li>Анализировать и совершенствовать услуги и контент сервиса.</li>
+          <li>Анализировать географический спрос для планирования расширения маршрутов.</li>
+          <li>Удостоверять личность пользователя при необходимости.</li>
+          <li>Соблюдать требования законодательства Республики Казахстан.</li>
+        </ul>
+        <p>Мы не используем данные в целях, которые не описаны в настоящей Политике.</p>
+      </div>
+
+      <div class="privacy-section">
+        <h2>5. Правовые основания обработки</h2>
+        <ul>
+          <li><strong>Согласие пользователя</strong> — основное основание для большинства операций.</li>
+          <li><strong>Исполнение договора (заказа)</strong> — обработка данных, необходимых для оказания услуги доставки.</li>
+          <li><strong>Законный интерес</strong> — аналитика безопасности и предотвращение мошенничества.</li>
+          <li><strong>Требование законодательства</strong> — в случаях, когда обработка необходима для соблюдения норм права.</li>
+        </ul>
+      </div>
+
+      <div class="privacy-section">
+        <h2>6. Cookies и аналитика</h2>
+        <p>Компания использует файлы cookie и веб-маяки для корректной работы сайта, анализа посещений, индивидуальной настройки услуг и обеспечения безопасности.</p>
+        <p>Для аналитики мы используем сторонние сервисы (в том числе Google Analytics, Яндекс.Метрика). Яндекс.Метрика обрабатывает данные на серверах в Российской Федерации — используя наш сайт, вы соглашаетесь с такой трансграничной передачей.</p>
+        <p>Вы можете отказаться от аналитических cookie через настройки браузера — это не повлияет на работу сайта.</p>
+      </div>
+
+      <div class="privacy-section">
+        <h2>7. Геоданные и адреса доставки</h2>
+        <ul>
+          <li>Адрес пользователь вводит добровольно — для проверки зоны покрытия или оформления заказа.</li>
+          <li>Геолокация устройства запрашивается только с явного разрешения пользователя.</li>
+          <li>Введённые адреса агрегируются по районам и кварталам без привязки к конкретному пользователю.</li>
+          <li>Для отображения карты мы используем сторонние картографические сервисы с их собственными политиками конфиденциальности.</li>
+        </ul>
+      </div>
+
+      <div class="privacy-section">
+        <h2>8. Передача данных третьим лицам</h2>
+        <p>Компания не продаёт персональные данные пользователей и не предоставляет их третьим лицам в маркетинговых целях без прямого согласия пользователя. Данные передаются только в случаях, необходимых для работы сервиса:</p>
+        <ul>
+          <li>Платёжные провайдеры — для обработки онлайн-оплаты.</li>
+          <li>Сервисы аналитики — в агрегированном виде.</li>
+          <li>Картографические сервисы — для проверки адреса и отображения зоны доставки.</li>
+          <li>Провайдер чата — для обеспечения переписки с Компанией.</li>
+          <li>Freedom SuperApp — при редиректе или интеграции.</li>
+          <li>Правоохранительные органы — по законным требованиям в строгом соответствии с законодательством РК.</li>
+        </ul>
+      </div>
+
+      <div class="privacy-section">
+        <h2>9. Трансграничная передача данных</h2>
+        <p>Компания может осуществлять трансграничную передачу персональных данных в иностранные государства, обеспечивающие защиту персональных данных.</p>
+        <p>В государства, не обеспечивающие такой защиты, передача осуществляется только при наличии согласия пользователя либо в иных случаях, предусмотренных законодательством РК (ст. 16 Закона «О персональных данных и их защите»).</p>
+      </div>
+
+      <div class="privacy-section">
+        <h2>10. Сроки хранения и прекращение обработки</h2>
+        <ul>
+          <li><strong>Данные при проверке зоны (без заказа):</strong> адрес в привязке к сессии — не более 90 дней; агрегированные данные хранятся бессрочно в обезличенном виде.</li>
+          <li><strong>Данные по оформленному заказу:</strong> 3 года с даты оказания услуги.</li>
+          <li><strong>Cookie аналитики:</strong> не более 26 месяцев.</li>
+          <li><strong>После отзыва согласия:</strong> обработка прекращается в течение 15 рабочих дней.</li>
+        </ul>
+      </div>
+
+      <div class="privacy-section">
+        <h2>11. Безопасность данных</h2>
+        <p>Персональные данные хранятся на серверах на территории Республики Казахстан. Для защиты данных Компания применяет:</p>
+        <ul>
+          <li>Шифрование передачи данных (HTTPS).</li>
+          <li>Ограничение доступа — только сотрудники, которым данные необходимы для работы.</li>
+          <li>Защиту с помощью паролей и иных технических средств.</li>
+        </ul>
+        <p>В случае инцидента безопасности мы уведомим уполномоченный орган незамедлительно.</p>
+      </div>
+
+      <div class="privacy-section">
+        <h2>12. Права пользователя</h2>
+        <p>Пользователь вправе в любой момент направить обращение по вопросам обработки персональных данных. В рамках такого обращения пользователь вправе:</p>
+        <ul>
+          <li>Знать о факте, целях, источниках и способах обработки своих данных.</li>
+          <li>Требовать изменения или дополнения своих данных.</li>
+          <li>Отозвать согласие на сбор и обработку данных.</li>
+          <li>Требовать блокирования или уничтожения данных при нарушении закона.</li>
+          <li>Возражать против автоматизированной обработки, затрагивающей его права.</li>
+          <li>Обжаловать действия Компании в порядке, установленном законодательством РК.</li>
+        </ul>
+        <p>Компания рассматривает обращения в течение 15 рабочих дней.</p>
+      </div>
+
+      <div class="privacy-section">
+        <h2>13. Beta — тестовый режим сервиса</h2>
+        <p>Данные, собранные в период тестирования, используются для оценки работоспособности сервиса, анализа географического спроса и устранения ошибок.</p>
+        <p>При интеграции с Freedom SuperApp оформление заказа происходит на платформе Freedom — к нему применяется политика конфиденциальности этого сервиса.</p>
+        <p>По завершении бета-тестирования настоящая Политика будет обновлена.</p>
+      </div>
+
+      <div class="privacy-section">
+        <h2>14. Будущие интеграции</h2>
+        <p>При внедрении новых функций (мобильное приложение, программа лояльности, партнёрские интеграции), предполагающих обработку дополнительных данных, Компания обновит Политику и уведомит пользователей. Функции, требующие согласия, будут запущены только после его получения.</p>
+      </div>
+
+      <div class="privacy-section">
+        <h2>15. Изменение политики</h2>
+        <p>Компания вправе в любой момент внести изменения в настоящую Политику, уведомив об этом пользователей на интернет-ресурсах Компании. При существенных изменениях Компания уведомит пользователей дополнительно по электронной почте.</p>
+        <p>Продолжение использования сервиса после вступления изменений в силу подтверждает согласие пользователя с новой редакцией. Дата последней редакции всегда указана в шапке документа.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const burger = document.getElementById('burger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        burger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
+  </script>
+</body>
+</html>
